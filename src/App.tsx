@@ -1,14 +1,22 @@
 import React from 'react';
 import './App.css';
+import { Accordion } from './components/accordion/Accordion';
 
 function App() {
   return (
     <div className="App">
-        This is APP component
+        <AppTitle/>
         <Rating/>
         <Accordion/>
+        <Rating/>
     </div>
   );
+}
+
+const AppTitle = () => {
+    return (
+        <>This is APP component</>
+    )
 }
 
 const Rating = () => {
@@ -21,19 +29,6 @@ const Rating = () => {
           <Star/>
       </div>
   )
-}
-
-const Accordion = () => {
-    return (
-        <div>
-            <h3>Menu</h3>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </div>
-    )
 }
 
 const Star = () => {
