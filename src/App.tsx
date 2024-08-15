@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {Accordion} from './components/accordion/Accordion';
 import {Rating} from "./components/rating/Rating";
+import {OnOff} from './components/onoff/OnOff';
 
 // type MoneyType = {
 //     banknots: string,
@@ -24,6 +25,7 @@ function App() {
             <Rating value={3}/>
             <Rating value={4}/>
             <Rating value={5}/>
+            <OnOff turnOn={true}></OnOff>
         </div>
     );
 }
