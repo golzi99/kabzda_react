@@ -1,38 +1,59 @@
 import React from 'react';
 
 type OnOffProps = {
-    turnOn: boolean
+    onOffState: boolean,
+    setOnOffState: () => void
 }
 
-export const OnOff = ({turnOn}: OnOffProps) => {
+export const OnOff = ({onOffState, setOnOffState}: OnOffProps) => {
+
+    const onStyle = {
+        width: '30px',
+        height: '20px',
+        border: '1px solid black',
+        display: 'inline-block',
+        padding: '2px',
+        backgroundColor: onOffState ? 'green' : 'white'
+    }
+
+    const offStyle = {
+        width: '30px',
+        height: '20px',
+        border: '1px solid black',
+        display: 'inline-block',
+        padding: '2px',
+        marginLeft: '2px',
+        backgroundColor: onOffState ? 'white' : 'red'
+    }
+
+    const indicatorStyle = {
+        width: '10px',
+        height: '10px',
+        borderRadius: "50%",
+        border: '1px solid black',
+        display: 'inline-block',
+        marginLeft: '5px',
+        backgroundColor: onOffState ? 'green' : 'red'
+    }
+
+    const onClickOn = () => {
+        if (!onOffState) {
+            setOnOffState()
+        }
+    }
+
+    const onClickOff = () => {
+        if (onOffState) {
+            setOnOffState()
+        }
+    }
+
+
     return (
         <div>
-            {turnOn ?
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <button style={{backgroundColor: 'green'}}>On</button>
-                    <button>Off</button>
-                    <div style={{
-                        borderRadius: '50%',
-                        backgroundColor: 'green',
-                        width: '20px',
-                        height: '20px',
-                        marginLeft: '5px'
-                    }}/>
-                </div> :
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <button>On</button>
-                    <button style={{backgroundColor: 'red'}}>Off</button>
-                    <div style={{
-                        borderRadius: '50%',
-                        backgroundColor: 'red',
-                        width: '20px',
-                        height: '20px',
-                        marginLeft: '5px'
-                    }}/>
-                </div>
-            }
+            <button style={onStyle} onClick={onClickOn}>On</button>
+            <button style={offStyle} onClick={onClickOff}>Off</button>
+            <div style={indicatorStyle}/>
         </div>
-
-
     );
 };

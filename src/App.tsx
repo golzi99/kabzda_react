@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Accordion} from './components/accordion/Accordion';
 import {Rating} from "./components/rating/Rating";
@@ -7,6 +7,13 @@ import {OnOff} from './components/onoff/OnOff';
 
 
 function App() {
+
+    const [onOffState, setOnOffState] =  useState(false)
+
+    const onClickOnOff = () => {
+        setOnOffState(!onOffState)
+    }
+
     return (
         <div className="App">
             <PageTitle title={"This is APP component"}/>
@@ -19,7 +26,7 @@ function App() {
             <Rating value={3}/>
             <Rating value={4}/>
             <Rating value={5}/>
-            <OnOff turnOn={true}></OnOff>
+            <OnOff onOffState={onOffState} setOnOffState={onClickOnOff}></OnOff>
         </div>
     );
 }
