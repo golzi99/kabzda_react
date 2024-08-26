@@ -18,8 +18,8 @@ function App() {
         <div className="App">
             <PageTitle title={"This is APP component"}/>
             <Rating value={3}/>
-            <Accordion title={"Menu"} />
-            <Accordion title={"Users"} collapsed/>
+            <Accordion title={"Menu"}/>
+            <Accordion title={"Users"}/>
             <Rating value={0}/>
             <Rating value={1}/>
             <Rating value={2}/>
