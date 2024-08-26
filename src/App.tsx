@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Accordion} from './components/accordion/Accordion';
-import {Rating} from "./components/rating/Rating";
+import {UncontrolledAccordion} from './components/accordion/UncontrolledAccordion';
+import {UncontrolledRating} from "./components/rating/UncontrolledRating";
 import {OnOff} from './components/onoff/OnOff';
-
+import {Rating} from './components/rating/Rating';
+import {Accordion} from './components/accordion/Accordion';
 
 
 function App() {
@@ -17,15 +18,10 @@ function App() {
     return (
         <div className="App">
             <PageTitle title={"This is APP component"}/>
-            <Rating value={3}/>
-            <Accordion title={"Menu"}/>
-            <Accordion title={"Users"}/>
-            <Rating value={0}/>
-            <Rating value={1}/>
-            <Rating value={2}/>
-            <Rating value={3}/>
+            <UncontrolledAccordion title={"Menu"}/>
+            <Accordion title={"Users"} collapsed/>
+            <UncontrolledRating value={0}/>
             <Rating value={4}/>
-            <Rating value={5}/>
             <OnOff onOffState={onOffState} setOnOffState={onClickOnOff}></OnOff>
         </div>
     );
