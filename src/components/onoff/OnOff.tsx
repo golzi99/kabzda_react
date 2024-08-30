@@ -2,7 +2,7 @@ import React from 'react';
 
 type OnOffProps = {
     onOffState: boolean,
-    setOnOffState: () => void
+    setOnOffState: (stateOnOff: boolean) => void
 }
 
 export const OnOff = ({onOffState, setOnOffState}: OnOffProps) => {
@@ -36,23 +36,10 @@ export const OnOff = ({onOffState, setOnOffState}: OnOffProps) => {
         backgroundColor: onOffState ? 'green' : 'red'
     }
 
-    const onClickOn = () => {
-        if (!onOffState) {
-            setOnOffState()
-        }
-    }
-
-    const onClickOff = () => {
-        if (onOffState) {
-            setOnOffState()
-        }
-    }
-
-
     return (
         <div>
-            <button style={onStyle} onClick={onClickOn}>On</button>
-            <button style={offStyle} onClick={onClickOff}>Off</button>
+            <button style={onStyle} onClick={() => setOnOffState(true)}>On</button>
+            <button style={offStyle} onClick={() => setOnOffState(false)}>Off</button>
             <div style={indicatorStyle}/>
         </div>
     );

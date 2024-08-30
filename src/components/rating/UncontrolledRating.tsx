@@ -1,36 +1,41 @@
 import React, {useState} from 'react';
+import {RatingValue} from '../../App';
 
 type RatingPropsType = {
-    value: 0 | 1 | 2 | 3 | 4 | 5
+    value: RatingValue
 }
 
 export const UncontrolledRating = (props: RatingPropsType) => {
 
     const [rating, setRating] = useState(props.value)
 
-    const onStarClick = (rating: 0 | 1 | 2 | 3 | 4 | 5) => {
-        setRating(rating)
-    }
+
 
     return (
         <div>
-            <Star selected={rating > 0} onClick={() => onStarClick(1)}/>
-            <Star selected={rating > 1} onClick={() => onStarClick(2)}/>
-            <Star selected={rating > 2} onClick={() => onStarClick(3)}/>
-            <Star selected={rating > 3} onClick={() => onStarClick(4)}/>
-            <Star selected={rating > 4} onClick={() => onStarClick(5)}/>
+            <Star selected={rating > 0} setRating={setRating} value={1}/>
+            <Star selected={rating > 1} setRating={setRating} value={2}/>
+            <Star selected={rating > 2} setRating={setRating} value={3}/>
+            <Star selected={rating > 3} setRating={setRating} value={4}/>
+            <Star selected={rating > 4} setRating={setRating} value={5}/>
         </div>
     )
 }
 
 type StarPropsType = {
     selected?: boolean,
-    onClick?: () => void
+    value: RatingValue
+    setRating: (value: RatingValue) => void
 }
 
 const Star = (props: StarPropsType) => {
+
+    const onStarClickHandler = () => {
+        props.setRating(props.value)
+    }
+
     return (
-        <span onClick={props.onClick} style={{cursor: 'pointer'}}>
+        <span onClick={onStarClickHandler} style={{cursor: 'pointer'}}>
             {props.selected ? <b>star </b> : <>star </>}
         </span>
     )
