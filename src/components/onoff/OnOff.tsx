@@ -1,6 +1,6 @@
 import React from 'react';
 
-type OnOffProps = {
+export type OnOffProps = {
     onOffState: boolean,
     setOnOffState: (stateOnOff: boolean) => void
 }

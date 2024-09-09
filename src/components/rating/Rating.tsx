@@ -1,7 +1,7 @@
 import React from 'react';
 import {RatingValue} from '../../App';
 
-type RatingPropsType = {
+export type RatingPropsType = {
     value: 0 | 1 | 2 | 3 | 4 | 5,
     onClick: (value: RatingValue) => void
 }
