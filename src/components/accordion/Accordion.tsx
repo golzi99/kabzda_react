@@ -1,9 +1,16 @@
 import React from 'react';
 
+export type ItemsType = {
+    title: string
+    value: any
+}
+
 export type AccordionPropsType = {
     title: string
     collapsed: boolean,
-    setCollapsedAccordion: () => void
+    setCollapsedAccordion: () => void,
+    items: Array<ItemsType>,
+    onClick: (value: any) => void
 }
 
 export const Accordion = (props: AccordionPropsType) => {
@@ -11,14 +18,14 @@ export const Accordion = (props: AccordionPropsType) => {
     return (
         <div>
             <AccordionTitle title={props.title} onClick={props.setCollapsedAccordion}/>
-            {!props.collapsed && <AccordionBody/>}
+            {!props.collapsed && <AccordionBody items={props.items} onClick={props.onClick}/>}
         </div>
     )
 }
 
 type AccordionTitlePropsType = {
     title: string,
-    onClick: () => void
+    onClick: () => void,
 }
 
 const AccordionTitle = (props: AccordionTitlePropsType) => {
@@ -27,12 +34,15 @@ const AccordionTitle = (props: AccordionTitlePropsType) => {
     )
 }
 
-const AccordionBody = () => {
+export type AccordionBodyPropsType = {
+    items: Array<ItemsType>,
+    onClick: (value: any) => void
+}
+
+const AccordionBody = (props: AccordionBodyPropsType) => {
     return (
         <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+            {props.items.map((item) => <li key={item.value} onClick={() => {props.onClick(item.value)}}>{item.title}</li>)}
         </ul>
     )
 }
