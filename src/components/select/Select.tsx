@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import s from './select.module.css'
 
 export type ItemsType = {
     title: string
@@ -12,34 +13,60 @@ export type SelectPropsType = {
 }
 
 export const Select = (props: SelectPropsType) => {
-    const [collapsed, setCollapsed] = useState(false)
+    const [active, setActive] = useState(false)
+    const [hoverElementValue, setHoverElementValue] = useState(props.value)
 
-    const onClickCollapsed = () => {
-        setCollapsed(!collapsed)
-    }
+    const toggleItems = () => setActive(!active)
 
     const selectItem = (value: any) => {
         props.onChange(value)
-        onClickCollapsed()
+        toggleItems()
     }
 
-    const title = props.items.find(i => i.value === props.value)?.title
+    useEffect(() => {
+        setHoverElementValue(props.value)
+    }, [props.value])
+
+    const selectedItem = props.items.find(i => i.value === props.value)
+    const hoveredItem = props.items.find(i => i.value === hoverElementValue)
+
+    const onKeyUp = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            for (let i = 0; i < props.items.length; i++) {
+                if (props.items[i].value === hoverElementValue) {
+                    const pretendentElement = event.key === 'ArrowDown' ? props.items[i + 1] : props.items[i - 1]
+                    if (pretendentElement) {
+                        props.onChange(pretendentElement.value)
+                        return
+                    }
+                }
+            }
+            if (!selectedItem)
+                props.onChange(props.items[0].value)
+        }
+        if (event.key === 'Enter' || event.key === 'Escape') {
+            setActive(false)
+        }
+    }
 
     return (
-        <div>
-            <div>
-                {title}
-                <button onClick={onClickCollapsed}>\/</button>
+        <>
+            <div className={s.select} tabIndex={0} onKeyUp={onKeyUp}>
+                <span className={s.main} onClick={toggleItems}>{selectedItem && selectedItem.title}</span>
+                <div className={s.selectList}>
+                    {active && props.items.map(item =>
+                        <div className={s.item + ' ' + (hoveredItem === item ? s.selected : '')}
+                             onMouseEnter={() => setHoverElementValue(item.value)}
+                             key={item.value}
+                             onClick={() => selectItem(item.value)}
+                        >
+                            {item.title}
+                        </div>
+                    )
+                    }
+                </div>
             </div>
-            {collapsed && props.items.map(item =>
-                <ul>
-                    <li key={item.value} onClick={() => selectItem(item.value)}>
-                        {item.title}
-                    </li>
-                </ul>
+        </>
 
-                )
-            }
-        </div>
     );
 };

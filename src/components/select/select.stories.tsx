@@ -1,53 +1,42 @@
 import React, {useState} from 'react';
-import {Meta, StoryObj} from '@storybook/react';
-import {ItemsType, Select} from './Select';
+import {Meta} from '@storybook/react';
+import {Select} from './Select';
 
 const meta: Meta<typeof Select> = {
     title: 'Select',
-    component: Select,
-    argTypes: {
-        onChange: { action: 'changed' },
-    },
+    component: Select
 }
 
 export default meta
 
-type Story = StoryObj<typeof Select>;
+export const WithValue = () => {
+    const [value, setValue] = useState(2)
 
-export const SelectComponent = () => {
-    const [value, setValue] = useState<any>(0)
-
-    const changeValue = (val: any) => {
-        setValue(val)
-    }
-
-    const items: Array<ItemsType> =  [
-        {title: 'None', value: 0},
-        {title: 'Moscow', value: 1},
-        {title: 'Tomsk', value: 2},
-        {title: 'Novgorod', value: 3},
-        {title: 'Minsk', value: 4}
-    ]
-
-    return <Select value={value} onChange={changeValue} items={items}/>
+    return <>
+        <Select onChange={setValue}
+                value={value}
+                items={[
+                    {value: 1, title: 'Minsk'},
+                    {value: 2, title: 'Moscow'},
+                    {value: 3, title: 'Tomsk'},
+                ]}/>
+    </>
 }
 
-export const SelectComponentWithoutValue = () => {
-    const [value, setValue] = useState<any>(0)
 
-    const changeValue = (val: any) => {
-        setValue(val)
-    }
+export const WithOutValue = () => {
+    const [value, setValue] = useState(null)
 
-    const items: Array<ItemsType> =  [
-        {title: 'None', value: 0},
-        {title: 'Moscow', value: 1},
-        {title: 'Tomsk', value: 2},
-        {title: 'Novgorod', value: 3},
-        {title: 'Minsk', value: 4}
-    ]
-
-    return <Select onChange={changeValue} items={items}/>
+    return <>
+        <Select onChange={setValue}
+                value={value}
+                items={[
+                    {value: 1, title: 'Minsk'},
+                    {value: 2, title: 'Moscow'},
+                    {value: 3, title: 'Tomsk'},
+                ]}/>
+    </>
 }
+
 
 
