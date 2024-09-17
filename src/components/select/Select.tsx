@@ -6,7 +6,7 @@ export type ItemsType = {
 }
 
 export type SelectPropsType = {
-    value: any,
+    value?: any,
     onChange: (value: any) => void,
     items: Array<ItemsType>
 }
@@ -27,17 +27,18 @@ export const Select = (props: SelectPropsType) => {
 
     return (
         <div>
-            {collapsed ? props.items.map(item =>
+            <div>
+                {title}
+                <button onClick={onClickCollapsed}>\/</button>
+            </div>
+            {collapsed && props.items.map(item =>
                 <ul>
                     <li key={item.value} onClick={() => selectItem(item.value)}>
                         {item.title}
                     </li>
                 </ul>
 
-                ) :
-                <div onClick={onClickCollapsed}>
-                    {props.items.find(i => i.value === props.value) ? title : '-------'}
-                </div>
+                )
             }
         </div>
     );

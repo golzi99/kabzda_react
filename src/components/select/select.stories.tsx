@@ -22,6 +22,7 @@ export const SelectComponent = () => {
     }
 
     const items: Array<ItemsType> =  [
+        {title: 'None', value: 0},
         {title: 'Moscow', value: 1},
         {title: 'Tomsk', value: 2},
         {title: 'Novgorod', value: 3},
@@ -29,6 +30,24 @@ export const SelectComponent = () => {
     ]
 
     return <Select value={value} onChange={changeValue} items={items}/>
+}
+
+export const SelectComponentWithoutValue = () => {
+    const [value, setValue] = useState<any>(0)
+
+    const changeValue = (val: any) => {
+        setValue(val)
+    }
+
+    const items: Array<ItemsType> =  [
+        {title: 'None', value: 0},
+        {title: 'Moscow', value: 1},
+        {title: 'Tomsk', value: 2},
+        {title: 'Novgorod', value: 3},
+        {title: 'Minsk', value: 4}
+    ]
+
+    return <Select onChange={changeValue} items={items}/>
 }
 
 
