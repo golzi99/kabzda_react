@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default {
     title: 'useEffect demo'
@@ -47,23 +47,23 @@ export const ExampleSetTimeOut = () => {
     )
 }
 
-export const Clock = () => {
-
-    let currentTime = new Date().toLocaleTimeString();
-    const [clock, setClock] = useState(currentTime)
-
-    useEffect(() => {
-        setInterval(() => {
-            currentTime = new Date().toLocaleTimeString()
-            setClock(currentTime)
-        }, 1000)
-    }, [])
-
-    return (
-        <>
-            <time>
-                {clock}
-            </time>
-        </>
-    )
-}
+// export const Clock = () => {
+//
+//     let currentTime = new Date().toLocaleTimeString();
+//     const [clock, setClock] = useState(currentTime)
+//
+//     useEffect(() => {
+//         setInterval(() => {
+//             currentTime = new Date().toLocaleTimeString()
+//             setClock(currentTime)
+//         }, 1000)
+//     }, [])
+//
+//     return (
+//         <>
+//             <time>
+//                 {clock}
+//             </time>
+//         </>
+//     )
+// }
