@@ -50,3 +50,4 @@ export const Clock2 = ({}: Props) => {
         </>
     )
 }
+// TODO: make clock 2 mods
